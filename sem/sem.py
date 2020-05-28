@@ -186,18 +186,21 @@ class SEM(object):
         """
 
         # update internal state
+        print("# update internal state")
         self._update_state(x, k)
         del k  # use self.k and self.d
 
         n = x.shape[0]
 
         # initialize arrays
+        print("# initialize arrays")
         # if not minimize_memory:
         post = np.zeros((n, self.k))
         pe = np.zeros(np.shape(x)[0])
         x_hat = np.zeros(np.shape(x))
         log_boundary_probability = np.zeros(np.shape(x)[0])
-
+        
+        print("# these are special case variables to deal with the possibility the current event is restarted")
         # these are special case variables to deal with the possibility the current event is restarted
         lik_restart_event = -np.inf
         repeat_prob = -np.inf
@@ -206,7 +209,7 @@ class SEM(object):
         #
         log_like = np.zeros((n, self.k)) - np.inf
         log_prior = np.zeros((n, self.k)) - np.inf
-
+        print("# this code just controls the presence/absence of a progress bar -- it isn't important")
         # this code just controls the presence/absence of a progress bar -- it isn't important
         if progress_bar:
             def my_it(l):
